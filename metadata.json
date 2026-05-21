@@ -1,0 +1,6 @@
+{
+  "name": "NOIR",
+  "description": "A premium modern messaging, community, and secure communication blueprint and interactive live simulator.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
