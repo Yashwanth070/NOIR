@@ -162,7 +162,7 @@ fun StoryScreen(
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = user.name.substringBefore(" "),
-                        color = if (user.isUnread) Color.White else Color(0xFF64748B),
+                        color = if (user.isUnread) MaterialTheme.colorScheme.onBackground else Color.Gray,
                         style = MaterialTheme.typography.bodySmall.copy(fontWeight = if (user.isUnread) FontWeight.Bold else FontWeight.Normal)
                     )
                 }
@@ -176,25 +176,24 @@ fun StoryScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp),
-            colors = CardDefaults.cardColors(containerColor = Color(0xFF111827)),
-            shape = RoundedCornerShape(16.dp),
-            border = BorderStroke(1.dp, Color(0xFF1E293B))
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+            shape = RoundedCornerShape(16.dp)
         ) {
             Column(modifier = Modifier.padding(20.dp)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(imageVector = Icons.Default.AutoAwesome, contentDescription = "Spark", tint = Color(0xFFF59E0B))
+                    Icon(imageVector = Icons.Default.AutoAwesome, contentDescription = "Spark", tint = MaterialTheme.colorScheme.primary)
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text(text = "Ephemeral Broadcasts Network", style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold, color = Color.White))
+                    Text(text = "Ephemeral Broadcasts Network", style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurfaceVariant))
                 }
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(
                     text = "NOIR Stories disappear automatically after 24 hours. They are globally end-to-end encrypted; only users containing verification keys associated with your profile handshake can decipher media segments.",
-                    style = MaterialTheme.typography.bodySmall.copy(color = Color(0xFF94A3B8), lineHeight = 18.sp)
+                    style = MaterialTheme.typography.bodySmall.copy(color = MaterialTheme.colorScheme.onSurfaceVariant, lineHeight = 18.sp)
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
                     text = "👉 TAP ANY AVATAR ABOVE TO EXPERIENCE THE PRECISE STORY VIEWER SYSTEM IN HIGH DEFINITION.",
-                    style = MaterialTheme.typography.bodySmall.copy(color = Color(0xFF3B82F6), fontWeight = FontWeight.Bold)
+                    style = MaterialTheme.typography.bodySmall.copy(color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
                 )
             }
         }

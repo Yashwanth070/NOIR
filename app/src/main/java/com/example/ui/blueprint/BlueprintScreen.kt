@@ -39,17 +39,13 @@ fun BlueprintScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF0D0E11)) // Premium luxury cosmic background
+            .background(MaterialTheme.colorScheme.background)
     ) {
         // Top Header
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(
-                    Brush.verticalGradient(
-                        colors = listOf(Color(0xFF1F2430), Color(0xFF0D0E11))
-                    )
-                )
+                .background(MaterialTheme.colorScheme.surface)
                 .padding(top = 16.dp, start = 20.dp, end = 20.dp, bottom = 12.dp)
         ) {
             Column {
@@ -59,23 +55,23 @@ fun BlueprintScreen() {
                     Icon(
                         imageVector = Icons.Default.Engineering,
                         contentDescription = "Engineering Icon",
-                        tint = Color(0xFF3B82F6),
+                        tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.size(28.dp)
                     )
                     Spacer(modifier = Modifier.width(10.dp))
                     Text(
-                        text = "AETHER BLUEPRINT",
+                        text = "NOIR BLUEPRINT",
                         style = MaterialTheme.typography.titleLarge.copy(
                             fontWeight = FontWeight.Bold,
                             letterSpacing = 2.sp,
-                            color = Color.White
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                     )
                 }
                 Text(
                     text = "Interactive Full-Stack Architecture Handbook",
                     style = MaterialTheme.typography.bodySmall.copy(
-                        color = Color(0xFF94A3B8)
+                        color = Color.Gray
                     )
                 )
             }
@@ -84,14 +80,14 @@ fun BlueprintScreen() {
         // Tab Selector Row
         ScrollableTabRow(
             selectedTabIndex = selectedTab,
-            containerColor = Color(0xFF0D0E11),
-            contentColor = Color(0xFF3B82F6),
+            containerColor = MaterialTheme.colorScheme.surface,
+            contentColor = MaterialTheme.colorScheme.primary,
             edgePadding = 12.dp,
-            divider = { HorizontalDivider(color = Color(0xFF1E293B)) },
+            divider = { HorizontalDivider(color = MaterialTheme.colorScheme.surfaceVariant) },
             indicator = { tabPositions ->
                 TabRowDefaults.SecondaryIndicator(
                     modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTab]),
-                    color = Color(0xFF3B82F6)
+                    color = MaterialTheme.colorScheme.primary
                 )
             }
         ) {
@@ -106,14 +102,14 @@ fun BlueprintScreen() {
                                 imageVector = tab.icon,
                                 contentDescription = tab.title,
                                 modifier = Modifier.size(18.dp),
-                                tint = if (selectedTab == index) Color(0xFF3B82F6) else Color(0xFF64748B)
+                                tint = if (selectedTab == index) MaterialTheme.colorScheme.primary else Color.Gray
                             )
                             Spacer(modifier = Modifier.width(8.dp))
                             Text(
                                 text = tab.title,
                                 style = MaterialTheme.typography.bodyMedium.copy(
                                     fontWeight = if (selectedTab == index) FontWeight.Bold else FontWeight.Normal,
-                                    color = if (selectedTab == index) Color.White else Color(0xFF94A3B8)
+                                    color = if (selectedTab == index) MaterialTheme.colorScheme.onSurface else Color.Gray
                                 )
                             )
                         }
@@ -577,19 +573,18 @@ fun RoadmapBusinessTab() {
             )
 
             Card(
-                colors = CardDefaults.cardColors(containerColor = Color(0xFF1E293B)),
-                shape = RoundedCornerShape(12.dp),
-                border = BorderStroke(1.dp, Color(0xFF334155))
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+                shape = RoundedCornerShape(12.dp)
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(
                         text = "1. Premium NOIR subscription ($4.99/mo): Live transcoder matching voice to text, high res animated emoji collections, custom profile backgrounds, bigger upload caps up to 4GB.",
-                        style = MaterialTheme.typography.bodyMedium.copy(color = Color.White, lineHeight = 20.sp)
+                        style = MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.onSurface, lineHeight = 20.sp)
                     )
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(
                         text = "2. Creator Channel tools: Seamless integration with paid channels, charging transaction structures on community paid subscriptions.",
-                        style = MaterialTheme.typography.bodyMedium.copy(color = Color.White, lineHeight = 20.sp)
+                        style = MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.onSurface, lineHeight = 20.sp)
                     )
                 }
             }
@@ -601,9 +596,8 @@ fun RoadmapBusinessTab() {
 @Composable
 fun HeaderCard(title: String, description: String) {
     Card(
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF1E293B)),
-        shape = RoundedCornerShape(14.dp),
-        border = BorderStroke(1.dp, Color(0xFF334155)),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        shape = RoundedCornerShape(12.dp),
         modifier = Modifier.fillMaxWidth()
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
@@ -611,14 +605,14 @@ fun HeaderCard(title: String, description: String) {
                 text = title,
                 style = MaterialTheme.typography.titleMedium.copy(
                     fontWeight = FontWeight.Bold,
-                    color = Color.White
+                    color = MaterialTheme.colorScheme.onSurface
                 )
             )
             Spacer(modifier = Modifier.height(6.dp))
             Text(
                 text = description,
                 style = MaterialTheme.typography.bodyMedium.copy(
-                    color = Color(0xFF94A3B8),
+                    color = Color.Gray,
                     lineHeight = 22.sp
                 )
             )
@@ -629,9 +623,8 @@ fun HeaderCard(title: String, description: String) {
 @Composable
 fun PointCard(icon: ImageVector, title: String, description: String) {
     Card(
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF111827)),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
         shape = RoundedCornerShape(12.dp),
-        border = BorderStroke(1.dp, Color(0xFF1F2937)),
         modifier = Modifier.fillMaxWidth()
     ) {
         Row(
@@ -642,10 +635,10 @@ fun PointCard(icon: ImageVector, title: String, description: String) {
                 modifier = Modifier
                     .size(40.dp)
                     .clip(RoundedCornerShape(8.dp))
-                    .background(Color(0xFF1F2937)),
+                    .background(MaterialTheme.colorScheme.background),
                 contentAlignment = Alignment.Center
             ) {
-                Icon(imageVector = icon, contentDescription = title, tint = Color(0xFF3B82F6), modifier = Modifier.size(20.dp))
+                Icon(imageVector = icon, contentDescription = title, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(20.dp))
             }
             Spacer(modifier = Modifier.width(14.dp))
             Column {
@@ -653,14 +646,14 @@ fun PointCard(icon: ImageVector, title: String, description: String) {
                     text = title,
                     style = MaterialTheme.typography.bodyLarge.copy(
                         fontWeight = FontWeight.Bold,
-                        color = Color.White
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
                     text = description,
                     style = MaterialTheme.typography.bodyMedium.copy(
-                        color = Color(0xFF94A3B8),
+                        color = Color.Gray,
                         lineHeight = 18.sp
                     )
                 )

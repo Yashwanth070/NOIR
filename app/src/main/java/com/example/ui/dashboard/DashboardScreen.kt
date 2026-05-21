@@ -83,7 +83,7 @@ fun DashboardScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF0D0E11))
+            .background(MaterialTheme.colorScheme.background)
             .verticalScroll(rememberScrollState())
             .padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -96,12 +96,12 @@ fun DashboardScreen() {
         ) {
             Column {
                 Text(
-                    text = "AETHER CORE METRICS",
-                    style = MaterialTheme.typography.titleLarge.copy(color = Color.White, fontWeight = FontWeight.Bold)
+                    text = "NOIR SYSTEM METRICS",
+                    style = MaterialTheme.typography.titleLarge.copy(color = MaterialTheme.colorScheme.onBackground, fontWeight = FontWeight.Bold)
                 )
                 Text(
                     text = "Consolidated cluster dashboards & defensive shield logs",
-                    style = MaterialTheme.typography.bodySmall.copy(color = Color(0xFF64748B))
+                    style = MaterialTheme.typography.bodySmall.copy(color = Color.Gray)
                 )
             }
             
@@ -128,19 +128,18 @@ fun DashboardScreen() {
             exit = slideOutVertically() + fadeOut()
         ) {
             Card(
-                colors = CardDefaults.cardColors(containerColor = Color(0xFF7F1D1D)),
-                border = BorderStroke(1.dp, Color.Red),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer),
                 shape = RoundedCornerShape(12.dp)
             ) {
                 Row(
                     modifier = Modifier.padding(14.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Icon(imageVector = Icons.Default.Shield, contentDescription = "Active Protection", tint = Color.White)
+                    Icon(imageVector = Icons.Default.Shield, contentDescription = "Active Protection", tint = MaterialTheme.colorScheme.onErrorContainer)
                     Spacer(modifier = Modifier.width(10.dp))
                     Text(
                         text = "Simulating Brute-Force Traffic: API Limiters and DDoS Shields are actively throttling ingress requests (HTTP 429). Cpu rates elevated.",
-                        color = Color.White,
+                        color = MaterialTheme.colorScheme.onErrorContainer,
                         style = MaterialTheme.typography.bodySmall
                     )
                 }
@@ -196,13 +195,12 @@ fun DashboardScreen() {
 
         // Cluster status layout indicator
         Card(
-            colors = CardDefaults.cardColors(containerColor = Color(0xFF111827)),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
             shape = RoundedCornerShape(14.dp),
-            border = BorderStroke(1.dp, Color(0xFF1E293B)),
             modifier = Modifier.fillMaxWidth()
         ) {
             Column(modifier = Modifier.padding(16.dp)) {
-                Text(text = "Primary Service Containers State", style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold, color = Color.White))
+                Text(text = "Primary Service Containers State", style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface))
                 Spacer(modifier = Modifier.height(12.dp))
                 
                 ServiceClusterRow(name = "noir-kong-ingress-gateway", replicas = "3/3 Active", status = "Healthy", col = MaterialTheme.colorScheme.primary)
@@ -214,9 +212,8 @@ fun DashboardScreen() {
 
         // Live streaming terminal console
         Card(
-            colors = CardDefaults.cardColors(containerColor = Color(0xFF030712)),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
             shape = RoundedCornerShape(14.dp),
-            border = BorderStroke(1.dp, Color(0xFF1E293B)),
             modifier = Modifier.fillMaxWidth()
         ) {
             Column(modifier = Modifier.padding(16.dp)) {
@@ -250,7 +247,7 @@ fun DashboardScreen() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(280.dp)
-                        .background(Color.Black)
+                        .background(MaterialTheme.colorScheme.background, RoundedCornerShape(8.dp))
                         .padding(10.dp)
                 ) {
                     LazyColumn(
@@ -286,8 +283,7 @@ fun DashboardScreen() {
 @Composable
 fun MetricStatsCard(icon: ImageVector, title: String, value: String, desc: String, col: Color, modifier: Modifier = Modifier) {
     Card(
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF111827)),
-        border = BorderStroke(1.dp, Color(0xFF1E293B)),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         shape = RoundedCornerShape(12.dp),
         modifier = modifier
     ) {
@@ -295,12 +291,12 @@ fun MetricStatsCard(icon: ImageVector, title: String, value: String, desc: Strin
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(imageVector = icon, contentDescription = title, tint = col, modifier = Modifier.size(16.dp))
                 Spacer(modifier = Modifier.width(6.dp))
-                Text(text = title, color = Color(0xFF94A3B8), style = MaterialTheme.typography.labelSmall)
+                Text(text = title, color = Color.Gray, style = MaterialTheme.typography.labelSmall)
             }
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = value,
-                color = Color.White,
+                color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold
             )
@@ -324,7 +320,7 @@ fun ServiceClusterRow(name: String, replicas: String, status: String, col: Color
         verticalAlignment = Alignment.CenterVertically
     ) {
         Column(modifier = Modifier.weight(1.5f)) {
-            Text(text = name, color = Color.White, style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace))
+            Text(text = name, color = MaterialTheme.colorScheme.onSurface, style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace))
             Text(text = replicas, color = Color.Gray, style = MaterialTheme.typography.labelSmall)
         }
         

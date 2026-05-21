@@ -166,7 +166,6 @@ fun ChatScreen() {
                                 thread.unreadCount = 0 // Clear unread on entry
                             }
                         )
-                        HorizontalDivider(color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f), modifier = Modifier.padding(horizontal = 20.dp))
                     }
                 }
             }
@@ -400,10 +399,10 @@ fun ConversationWindow(thread: ChatThread, onBack: () -> Unit) {
                 OutlinedTextField(
                     value = inputMessage,
                     onValueChange = { inputMessage = it },
-                    placeholder = { Text("Compose secure message...", color = Color.Gray) },
+                    placeholder = { Text("Message...", color = Color.Gray) },
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedTextColor = Color.White,
-                        unfocusedTextColor = Color.White,
+                        focusedTextColor = MaterialTheme.colorScheme.onBackground,
+                        unfocusedTextColor = MaterialTheme.colorScheme.onBackground,
                         focusedBorderColor = Color.Transparent,
                         unfocusedBorderColor = Color.Transparent,
                         focusedContainerColor = MaterialTheme.colorScheme.background,
@@ -634,9 +633,9 @@ fun MessageBubble(message: ChatMessage, onLongClick: () -> Unit) {
 
                     Text(
                         text = message.body,
-                        color = Color.White,
-                        fontSize = 14.sp,
-                        lineHeight = 18.sp
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        fontSize = 15.sp,
+                        lineHeight = 20.sp
                     )
                 }
             }

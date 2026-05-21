@@ -62,7 +62,7 @@ fun AuthScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF0D0E11))
+            .background(MaterialTheme.colorScheme.background)
             .verticalScroll(rememberScrollState())
             .padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -72,8 +72,8 @@ fun AuthScreen() {
             Icon(imageVector = Icons.Default.Security, contentDescription = "Security Status", tint = Color(0xFF10B981), modifier = Modifier.size(32.dp))
             Spacer(modifier = Modifier.width(10.dp))
             Column {
-                Text(text = "AETHER SECURITY", style = MaterialTheme.typography.titleLarge.copy(color = Color.White, fontWeight = FontWeight.Bold))
-                Text(text = "Dual-layer authentication & end-to-end signal matrix", style = MaterialTheme.typography.bodySmall.copy(color = Color(0xFF64748B)))
+                Text(text = "NOIR SECURITY", style = MaterialTheme.typography.titleLarge.copy(color = MaterialTheme.colorScheme.onBackground, fontWeight = FontWeight.Bold))
+                Text(text = "Dual-layer authentication & end-to-end signal matrix", style = MaterialTheme.typography.bodySmall.copy(color = Color.Gray))
             }
         }
 
@@ -81,25 +81,24 @@ fun AuthScreen() {
             if (!isMfaMode) {
                 // Phase 1: Main Login Panel
                 Card(
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFF111827)),
-                    shape = RoundedCornerShape(16.dp),
-                    border = BorderStroke(1.dp, Color(0xFF1E293B))
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                    shape = RoundedCornerShape(16.dp)
                 ) {
                     Column(
                         modifier = Modifier.padding(20.dp),
                         verticalArrangement = Arrangement.spacedBy(14.dp)
                     ) {
-                        Text(text = "Secure Portal Identity", style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold, color = Color.White))
+                        Text(text = "Secure Portal Identity", style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface))
                         
                         OutlinedTextField(
                             value = emailInput,
                             onValueChange = { emailInput = it },
-                            label = { Text("Email Identity", color = Color(0xFF94A3B8)) },
+                            label = { Text("Email Identity", color = Color.Gray) },
                             colors = OutlinedTextFieldDefaults.colors(
-                                focusedTextColor = Color.White,
-                                unfocusedTextColor = Color.White,
-                                focusedBorderColor = Color(0xFF3B82F6),
-                                unfocusedBorderColor = Color(0xFF334155)
+                                focusedTextColor = MaterialTheme.colorScheme.onSurface,
+                                unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
+                                focusedBorderColor = MaterialTheme.colorScheme.primary,
+                                unfocusedBorderColor = MaterialTheme.colorScheme.surfaceVariant
                             ),
                             modifier = Modifier.fillMaxWidth()
                         )
@@ -107,13 +106,13 @@ fun AuthScreen() {
                         OutlinedTextField(
                             value = passwordInput,
                             onValueChange = { passwordInput = it },
-                            label = { Text("Password", color = Color(0xFF94A3B8)) },
+                            label = { Text("Password", color = Color.Gray) },
                             visualTransformation = PasswordVisualTransformation(),
                             colors = OutlinedTextFieldDefaults.colors(
-                                focusedTextColor = Color.White,
-                                unfocusedTextColor = Color.White,
-                                focusedBorderColor = Color(0xFF3B82F6),
-                                unfocusedBorderColor = Color(0xFF334155)
+                                focusedTextColor = MaterialTheme.colorScheme.onSurface,
+                                unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
+                                focusedBorderColor = MaterialTheme.colorScheme.primary,
+                                unfocusedBorderColor = MaterialTheme.colorScheme.surfaceVariant
                             ),
                             modifier = Modifier.fillMaxWidth()
                         )
@@ -123,7 +122,7 @@ fun AuthScreen() {
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .clip(RoundedCornerShape(8.dp))
-                                .background(Color(0xFF030712))
+                                .background(MaterialTheme.colorScheme.background)
                                 .padding(10.dp)
                         ) {
                             Text(text = "Argon2id Memory Hashing Preview (Client-Side Hashed prior to dispatch):", color = Color.Gray, style = MaterialTheme.typography.labelSmall)
@@ -156,36 +155,34 @@ fun AuthScreen() {
             } else {
                 // Phase 2: MFA OTP Screen
                 Card(
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFF111827)),
-                    shape = RoundedCornerShape(16.dp),
-                    border = BorderStroke(1.dp, Color(0xFF1E293B))
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                    shape = RoundedCornerShape(16.dp)
                 ) {
                     Column(
                         modifier = Modifier.padding(20.dp),
                         verticalArrangement = Arrangement.spacedBy(14.dp)
                     ) {
-                        Text(text = "Multi-Factor Access Code", style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold, color = Color.White))
+                        Text(text = "Multi-Factor Access Code", style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface))
                         
                         if (otpSentMessage != null) {
                             Box(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .clip(RoundedCornerShape(8.dp))
-                                    .background(Color(0xFF0F172A))
-                                    .border(BorderStroke(1.dp, Color(0xFF1D4ED8)), RoundedCornerShape(8.dp))
+                                    .background(MaterialTheme.colorScheme.surfaceVariant)
                                     .padding(10.dp)
                             ) {
                                 Row(verticalAlignment = Alignment.CenterVertically) {
-                                    Icon(imageVector = Icons.Default.OfflinePin, contentDescription = "Sent Code", tint = Color(0xFF3B82F6))
+                                    Icon(imageVector = Icons.Default.OfflinePin, contentDescription = "Sent Code", tint = MaterialTheme.colorScheme.primary)
                                     Spacer(modifier = Modifier.width(8.dp))
-                                    Text(text = otpSentMessage!!, color = Color(0xFF93C5FD), style = MaterialTheme.typography.bodySmall)
+                                    Text(text = otpSentMessage!!, color = MaterialTheme.colorScheme.primary, style = MaterialTheme.typography.bodySmall)
                                 }
                             }
                         }
 
                         Text(
                             text = "Please enter the 6-digit verification code sent to your device identity to establish authentication handshakes.",
-                            color = Color(0xFF94A3B8),
+                            color = Color.Gray,
                             style = MaterialTheme.typography.bodySmall
                         )
 
@@ -194,10 +191,10 @@ fun AuthScreen() {
                             onValueChange = { if (it.length <= 6) otpInput = it },
                             placeholder = { Text("E.g. 574283", color = Color.Gray) },
                             colors = OutlinedTextFieldDefaults.colors(
-                                focusedTextColor = Color.White,
-                                unfocusedTextColor = Color.White,
-                                focusedBorderColor = Color(0xFF10B981),
-                                unfocusedBorderColor = Color(0xFF334155)
+                                focusedTextColor = MaterialTheme.colorScheme.onSurface,
+                                unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
+                                focusedBorderColor = MaterialTheme.colorScheme.primary,
+                                unfocusedBorderColor = MaterialTheme.colorScheme.surfaceVariant
                             ),
                             modifier = Modifier.fillMaxWidth()
                         )
@@ -212,12 +209,12 @@ fun AuthScreen() {
                                     otpSentMessage = null
                                     otpInput = ""
                                 },
-                                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1F2937)),
+                                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
                                 modifier = Modifier
                                     .weight(1f)
                                     .height(48.dp)
                             ) {
-                                Text(text = "Back", color = Color.White)
+                                Text(text = "Back", color = MaterialTheme.colorScheme.onSurfaceVariant)
                             }
                             Spacer(modifier = Modifier.width(12.dp))
                             Button(
@@ -225,12 +222,12 @@ fun AuthScreen() {
                                     // Simulated real verification
                                     authSuccess = true
                                 },
-                                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF10B981)),
+                                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                                 modifier = Modifier
                                     .weight(1.5f)
                                     .height(48.dp)
                             ) {
-                                Text(text = "Establish Handshake", color = Color.White, fontWeight = FontWeight.Bold)
+                                Text(text = "Establish Handshake", color = MaterialTheme.colorScheme.onPrimary, fontWeight = FontWeight.Bold)
                             }
                         }
                     }
@@ -239,20 +236,19 @@ fun AuthScreen() {
         } else {
             // Success State: Session information view
             Card(
-                colors = CardDefaults.cardColors(containerColor = Color(0xFF065F46).copy(alpha = 0.4f)),
-                shape = RoundedCornerShape(16.dp),
-                border = BorderStroke(1.dp, Color(0xFF10B981))
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+                shape = RoundedCornerShape(16.dp)
             ) {
                 Column(
                     modifier = Modifier.padding(20.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
-                    Icon(imageVector = Icons.Default.VerifiedUser, contentDescription = "Verified User", tint = Color(0xFF34D399), modifier = Modifier.size(54.dp))
-                    Text(text = "Identity Handshake Established!", style = MaterialTheme.typography.titleMedium.copy(color = Color.White, fontWeight = FontWeight.Bold))
+                    Icon(imageVector = Icons.Default.VerifiedUser, contentDescription = "Verified User", tint = MaterialTheme.colorScheme.onPrimaryContainer, modifier = Modifier.size(54.dp))
+                    Text(text = "Identity Handshake Established!", style = MaterialTheme.typography.titleMedium.copy(color = MaterialTheme.colorScheme.onPrimaryContainer, fontWeight = FontWeight.Bold))
                     Text(
                         text = "Your device has completed the secure cryptographic handshake using Signal-inspired triple Diffie-Hellman matrices.",
-                        color = Color(0xFFD1FAE5),
+                        color = MaterialTheme.colorScheme.onPrimaryContainer,
                         style = MaterialTheme.typography.bodySmall,
                         textAlign = TextAlign.Center
                     )
@@ -262,9 +258,9 @@ fun AuthScreen() {
                             isMfaMode = false
                             otpInput = ""
                         },
-                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF047857))
+                        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
                     ) {
-                        Text(text = "Simulate New Encryption Login", color = Color.White)
+                        Text(text = "Simulate New Encryption Login", color = MaterialTheme.colorScheme.onPrimary)
                     }
                 }
             }
@@ -272,50 +268,49 @@ fun AuthScreen() {
 
         // Token Rotation Monitor Card
         Card(
-            colors = CardDefaults.cardColors(containerColor = Color(0xFF111827)),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
             shape = RoundedCornerShape(16.dp),
-            border = BorderStroke(1.dp, Color(0xFF1E293B)),
             modifier = Modifier.fillMaxWidth()
         ) {
             Column(modifier = Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(imageVector = Icons.Default.Cached, contentDescription = "Rotator Logo", tint = Color(0xFFEAB308), modifier = Modifier.size(20.dp))
+                    Icon(imageVector = Icons.Default.Cached, contentDescription = "Rotator Logo", tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(20.dp))
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text(text = "Active JWT Access & Refresh Token Rotation", style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold, color = Color.White))
+                    Text(text = "Active JWT Access & Refresh Token Rotation", style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface))
                 }
                 Text(
                     text = "NOIR servers rotate short-lived JWT access tokens every 15 minutes. Refresh tokens are hash-locked to specific client devices and rotated on every single Refresh demand to thwart reuse session attacks.",
-                    color = Color(0xFF94A3B8),
+                    color = Color.Gray,
                     style = MaterialTheme.typography.bodySmall
                 )
 
-                Divider(color = Color(0xFF1E293B))
+                HorizontalDivider(color = MaterialTheme.colorScheme.surface)
 
                 Text(text = "ACCESS TOKEN (SHORT LIVED):", color = Color.Gray, style = MaterialTheme.typography.labelSmall)
                 Text(
                     text = accessToken,
-                    color = Color(0xFF93C5FD),
+                    color = MaterialTheme.colorScheme.primary,
                     fontFamily = FontFamily.Monospace,
                     fontSize = 11.sp,
                     maxLines = 1,
                     modifier = Modifier
                         .fillMaxWidth()
                         .clip(RoundedCornerShape(6.dp))
-                        .background(Color.Black)
+                        .background(MaterialTheme.colorScheme.background)
                         .padding(8.dp)
                 )
 
                 Text(text = "REFRESH TOKEN (ROTATED ON USE):", color = Color.Gray, style = MaterialTheme.typography.labelSmall)
                 Text(
                     text = refreshToken,
-                    color = Color(0xFFFDE047),
+                    color = MaterialTheme.colorScheme.secondary,
                     fontFamily = FontFamily.Monospace,
                     fontSize = 11.sp,
                     maxLines = 1,
                     modifier = Modifier
                         .fillMaxWidth()
                         .clip(RoundedCornerShape(6.dp))
-                        .background(Color.Black)
+                        .background(MaterialTheme.colorScheme.background)
                         .padding(8.dp)
                 )
             }
@@ -323,34 +318,33 @@ fun AuthScreen() {
 
         // Active Devices Panel List
         Card(
-            colors = CardDefaults.cardColors(containerColor = Color(0xFF111827)),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
             shape = RoundedCornerShape(16.dp),
-            border = BorderStroke(1.dp, Color(0xFF1E293B)),
             modifier = Modifier.fillMaxWidth()
         ) {
             Column(modifier = Modifier.padding(20.dp)) {
-                Text(text = "Authenticated Devices (Active Handshakes)", style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold, color = Color.White))
+                Text(text = "Authenticated Devices (Active Handshakes)", style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface))
                 Spacer(modifier = Modifier.height(14.dp))
                 
                 DeviceRow(
                     icon = Icons.Default.PhoneAndroid,
                     name = "Pixel Fold (Current Device)",
                     status = "Authorized (Rotates keys 3s ago)",
-                    col = Color(0xFF10B981)
+                    col = MaterialTheme.colorScheme.primary
                 )
-                Divider(color = Color(0xFF1E293B), modifier = Modifier.padding(vertical = 10.dp))
+                HorizontalDivider(color = MaterialTheme.colorScheme.surfaceVariant, modifier = Modifier.padding(vertical = 10.dp))
                 DeviceRow(
                     icon = Icons.Default.Web,
                     name = "MacBook Pro M3 Max (Chrome Sandbox)",
                     status = "Authorized (Active last seen 24 mins ago)",
-                    col = Color(0xFF3B82F6)
+                    col = MaterialTheme.colorScheme.secondary
                 )
-                Divider(color = Color(0xFF1E293B), modifier = Modifier.padding(vertical = 10.dp))
+                HorizontalDivider(color = MaterialTheme.colorScheme.surfaceVariant, modifier = Modifier.padding(vertical = 10.dp))
                 DeviceRow(
                     icon = Icons.Default.Computer,
                     name = "Arch Linux Kernel Node Client",
                     status = "Authorized (Active last seen 2 days ago)",
-                    col = Color(0xFF8B5CF6)
+                    col = MaterialTheme.colorScheme.tertiary
                 )
             }
         }
@@ -364,18 +358,18 @@ fun DeviceRow(icon: androidx.compose.ui.graphics.vector.ImageVector, name: Strin
             modifier = Modifier
                 .size(36.dp)
                 .clip(RoundedCornerShape(8.dp))
-                .background(Color(0xFF1F2937)),
+                .background(MaterialTheme.colorScheme.surfaceVariant),
             contentAlignment = Alignment.Center
         ) {
-            Icon(imageVector = icon, contentDescription = name, tint = Color.LightGray, modifier = Modifier.size(18.dp))
+            Icon(imageVector = icon, contentDescription = name, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(18.dp))
         }
         Spacer(modifier = Modifier.width(12.dp))
         Column {
-            Text(text = name, color = Color.White, style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold))
+            Text(text = name, color = MaterialTheme.colorScheme.onSurface, style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold))
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Box(modifier = Modifier.size(6.dp).background(col, RoundedCornerShape(2.dp)))
                 Spacer(modifier = Modifier.width(6.dp))
-                Text(text = status, color = Color(0xFF94A3B8), style = MaterialTheme.typography.labelSmall)
+                Text(text = status, color = Color.Gray, style = MaterialTheme.typography.labelSmall)
             }
         }
     }
